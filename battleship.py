@@ -10,11 +10,19 @@ Use functions to allow your game to have more features like rematches, statistic
 """
 
 from random import randint
+from inputs import positiveIntInput
 
 # print formatted board
 def print_board(board):
     for row in board:
         print " ".join(row)
+
+# find random row and col for ship
+def random_row(board):
+    return randint(0, len(board) - 1)
+
+def random_col(board):
+    return randint(0, len(board[0]) - 1)
 
 # create blank board
 board = []
@@ -27,12 +35,6 @@ for x in range(board_size):
 print "Let's play Battleship!"
 print_board(board)
 
-def random_row(board):
-    return randint(0, len(board) - 1)
-
-def random_col(board):
-    return randint(0, len(board[0]) - 1)
-
 ship1_row = random_row(board)
 ship1_col = random_col(board)
 ship2_row = random_row(board)
@@ -43,8 +45,9 @@ while ship1_row == ship2_row and ship1_col == ship2_col:
 
 for turn in range(4):
     print "Turn", turn + 1
-    guess_row = int(raw_input("Guess Row:"))
-    guess_col = int(raw_input("Guess Col:"))
+    
+    guess_row = positiveIntInput("Guess Row:")
+    guess_col = positiveIntInput("Guess Col:")
     
     if guess_row == ship1_row and guess_col == ship1_row:
         print "Congratulations! You sunk my battleship!"
